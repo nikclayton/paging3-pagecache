@@ -104,12 +104,7 @@ class TimelinePagingSource constructor(
 
     override fun getRefreshKey(state: PagingState<String, Status>): String? {
         val refreshKey = if (state.anchorPosition != null) {
-            // In testing, state.anchorPosition always seems to be off by 2. I suspect that might
-            // be because of the load state header and footer that are on the list. If this is
-            // not corrected here then the user's reading position is *not* maintained as they
-            // scroll over a page boundary, and the list jumps up by two posts. Adding 2 here
-            // corrects for this.
-            state.closestItemToPosition(state.anchorPosition!! + 2)?.id
+            state.closestItemToPosition(state.anchorPosition!!)?.id
         } else {
             pageCache.firstEntry()?.value?.data?.let { data ->
                 data.getOrNull(data.size / 2)?.id
