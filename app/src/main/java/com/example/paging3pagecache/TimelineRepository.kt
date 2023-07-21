@@ -6,7 +6,6 @@ import androidx.paging.InvalidatingPagingSourceFactory
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import androidx.paging.PagingSource
 import com.example.paging3pagecache.mastodon.MastodonService
 import com.example.paging3pagecache.mastodon.Status
 import kotlinx.coroutines.CoroutineScope
@@ -75,18 +74,6 @@ class TimelineRepository constructor(
             ),
             pagingSourceFactory = factory!!
         ).flow
-    }
-
-    /** Invalidate the active paging source, see [PagingSource.invalidate] */
-    fun invalidate() {
-        factory?.invalidate()
-    }
-
-    fun reload() {
-        synchronized(pageCache) {
-            pageCache.clear()
-        }
-        invalidate()
     }
 
     companion object {

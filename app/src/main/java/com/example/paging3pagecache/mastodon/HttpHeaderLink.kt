@@ -7,7 +7,8 @@ import androidx.core.net.toUri
 /**
  * Represents one link and its parameters from the link header of an HTTP message.
  *
- * @see [RFC5988](https://tools.ietf.org/html/rfc5988)
+ * - [RFC5988](https://tools.ietf.org/html/rfc5988)
+ * - [Paginating through API responses](https://docs.joinmastodon.org/api/guidelines/#pagination)
  */
 class HttpHeaderLink
 @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)

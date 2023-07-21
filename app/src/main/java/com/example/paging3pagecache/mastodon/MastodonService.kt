@@ -4,7 +4,7 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-public interface MastodonService {
+interface MastodonService {
     @GET("api/v1/timelines/public")
     suspend fun publicTimeline(
         @Query("local") local: Boolean? = null,
