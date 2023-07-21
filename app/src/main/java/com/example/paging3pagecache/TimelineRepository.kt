@@ -78,6 +78,6 @@ class TimelineRepository constructor(
 
     companion object {
         private const val TAG = "TimelineRepository"
-        private const val PAGE_SIZE = 30
+        private const val PAGE_SIZE = 15
     }
 }
