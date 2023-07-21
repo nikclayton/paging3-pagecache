@@ -1,4 +1,4 @@
-package com.example.paging3pagecache
+package com.example.paging3pagecache.mastodon
 
 import com.google.gson.annotations.SerializedName
 

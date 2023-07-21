@@ -3,10 +3,12 @@ package com.example.paging3pagecache
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
+import androidx.compose.ui.node.getOrAddAdapter
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.paging3pagecache.databinding.ActivityMainBinding
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
@@ -18,18 +20,13 @@ class MainActivity : ComponentActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val statusAdapter = StatusAdapter()
+        binding.recyclerView.adapter = statusAdapter
+
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.uiState.collect {
-                    if (it.error != null) {
-                        binding.textView.text = it.error
-                    } else {
-                        var s = ""
-                        it.statuses.forEach {
-                            s += it.content
-                        }
-                        binding.textView.text = s
-                    }
+                viewModel.statuses.collectLatest { pagingData ->
+                    statusAdapter.submitData(pagingData)
                 }
             }
         }
